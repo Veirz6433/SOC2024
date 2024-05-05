@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int mySqrt(int x) {
+    
+    if (x == 0 || x == 1) // Base cases: sqrt(0) = 0, sqrt(1) = 1
+        return x;
+
+    long long guess = x / 2; // Initial guess
+
+    while (true) {
+        long long new_guess = (guess + x / guess) / 2;
+        
+        if (new_guess >= guess) // If new_guess is greater than or equal to guess, we've found the floor(sqrt(x))
+            return guess;
+
+        guess = new_guess;
+    }
+}
+};
