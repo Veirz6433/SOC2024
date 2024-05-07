@@ -1,0 +1,60 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+
+//---------Approach 1 -----------------------
+
+    int m = matrix.size();
+    int n = matrix[0].size();
+
+    int nve = 0;
+    int pve = m * n;
+
+    while (nve < pve) {
+      int zero = (nve + pve) / 2;
+      int i = zero / n;
+      int j = zero % n;
+      if (matrix[i][j] == target)
+        return true;
+      if (matrix[i][j] < target)
+        nve = zero + 1;
+      else
+        pve = zero;
+    }
+
+    return false;
+
+//-------------- Approach 2 -------------------
+int i = 0;
+
+        while(i < m){
+            if(target <= matrix[i][n - 1]){
+                int j = 0;
+                while(j < n){
+                    if(target == matrix[i][j]) return true;
+                    else if(target < matrix[i][j]) return false;
+                    else j++;
+                }
+                return false;
+            }
+            i++;
+        }
+
+        return false;
+
+//------------------------ Approach 3 ------------------
+ int m = matrix.size();
+
+        for(int i = 0; i < m; i++){
+
+            int n = matrix[i].size();
+
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] == target) return true;
+            }
+        }
+
+        return false;
+        
+    }
+};
