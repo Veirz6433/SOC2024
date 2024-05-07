@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+
+// ------------------ Approach 1 ---------------------
+
+        int a = 0, z = nums.size() - 1;
+
+        while(a < z){
+
+            int m = (a + z) / 2;
+            if (m & 1) m--;
+
+            if (nums[m] == nums[m + 1]) a = m + 2;
+            else z = m;
+        
+        }
+
+        return nums[a];
+
+// ------------------- Approach 2 ---------------------
+int ans = 0;
+
+    for(int i = 0; i < nums.size(); i++){
+        ans = ans ^ nums[i];
+    }
+
+    return ans;
+
+// --------------------- Approach 3 ------------------------
+
+ long long aSum = 0;
+        long long sSum = 0;
+        set<int> my_set;
+
+        for(int i = 0; i < nums.size(); i++){
+            aSum += nums[i];
+
+            my_set.insert(nums[i]);
+
+        }
+
+        for(int val : my_set){
+            sSum += val;
+        }
+
+        return (sSum * 2) - aSum;
+        
+    }
+};
