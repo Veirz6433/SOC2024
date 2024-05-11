@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int n=nums.size();
+        int start= 0; 
+        int end= n-1;
+        while(start<end){
+            int mid= end+(start-end)/2;
+            if(mid & 1){
+                mid--;
+            }
+            if(nums[mid]==nums[mid+1])
+            start=start+2;
+            else 
+            end=mid;
+        }
+        return nums[start];
+    }
+};
