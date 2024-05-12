@@ -1,0 +1,21 @@
+// Valid parenthesis problem
+class Solution {
+public:
+    bool isValid(string s) {
+     unordered_map<char,int> m={{'(',-1},{'{',-2},{'[',-3},{')',1},{'}',2},{']',3}};
+     stack<char> stk;
+     for(int i=0;i<s.size();i++){
+        if(m[s[i]]<0){
+            stk.push(s[i]);
+        }
+        else{
+            if(stk.empty()) return 0;
+            char top = stk.top();
+            stk.pop();
+            if(m[top] + m[s[i]] !=0 ) return 0;
+        }
+    }
+     if(stk.empty()) return 1;
+      return 0;
+    }
+};
