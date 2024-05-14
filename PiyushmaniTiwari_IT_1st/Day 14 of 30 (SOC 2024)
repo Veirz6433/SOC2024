@@ -1,0 +1,32 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+// } Driver Code Ends
+//User function template for C++
+class Solution{
+public:
+	int search(string pat, string txt) {
+	        int n=txt.size();
+        int i=0;
+        int len=pat.size();
+        unordered_map<char,int>mp1,mp2;
+        for(int i=0;i<pat.size();i++){
+            mp1[txt[i]]++;
+            mp2[pat[i]]++;
+        }
+        int ans=0;
+        while(i<=n-len){
+            if(mp1==mp2) ans++;
+            mp1[txt[i]]--;
+            if(mp1[txt[i]]==0) mp1.erase(txt[i]);
+            i++;
+            int j=len+i-1;
+            mp1[txt[j]]++;
+        }
+        return ans;
+	}
+
+};
