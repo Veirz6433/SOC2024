@@ -1,0 +1,20 @@
+class Solution {
+public:
+    long long maximumHappinessSum(vector<int>& happiness, int k) {
+        priority_queue<int> maxHeap;
+        long count = 0, res = 0;
+        for (int h: happiness) {
+            maxHeap.push(h);
+        }
+
+        while(!maxHeap.empty() && k > 0) {
+            int h = maxHeap.top();
+            maxHeap.pop();
+
+            res += (h - count) >= 0 ? (h - count) : 0;
+            count++;
+            k--;
+        }
+        return res;
+    }
+};
