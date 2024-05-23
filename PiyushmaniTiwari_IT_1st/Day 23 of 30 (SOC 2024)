@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+          int sign = 1;   //positive
+
+        if((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)){
+            sign = -1; //negative
+        }
+        if (dividend == INT_MIN && divisor == -1) {
+            return INT_MAX; //for  prevent overflow
+        }
+
+
+        long long int quotient = 0;
+
+        long long a_dividend = (long long) abs(dividend);
+        long long a_divisor = (long long) abs(divisor);
+
+        if((sign > 0 && divisor == 1) || (sign < 0 && divisor == -1)) return a_dividend * sign;
+
+        while(a_dividend >= a_divisor){
+            a_dividend -= a_divisor;
+            quotient++;
+        }
+
+        return quotient*sign;
+        
+    }
+};
