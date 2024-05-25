@@ -1,0 +1,20 @@
+int search(string pat, string txt) {
+	        int n=txt.size();
+        int i=0;
+        int len=pat.size();
+        unordered_map<char,int>map1,map2;
+        for(int i=0;i<pat.size();i++){
+            map1[txt[i]]++;
+            map2[pat[i]]++;
+        }
+        int ans=0;
+        while(i<=n-len){
+            if(map1==map2) ans++;
+            map1[txt[i]]--;
+            if(map1[txt[i]]==0) map1.erase(txt[i]);
+            i++;
+            int j=len+i-1;
+            map1[txt[j]]++;
+        }
+        return ans;
+	}
