@@ -1,0 +1,22 @@
+class solution{
+public:
+    vector<int> candyStore(int candies[], int N, int K)
+    {
+// Write Your Code here
+        int max=0, min=0;
+        sort(candies,candies+N);
+        int value = N/(K+1);
+        if(N%(K+1)!=0){
+            value++;
+        }
+        for(int i=0;i<N&&i<value;i++){
+            min+=candies[i];
+        }
+        reverse(candies,candies+N);
+        for(int i=0;i<N&&i<value;i++){
+            max+=candies[i];
+        }
+        
+        return {min,max};
+    }
+};
