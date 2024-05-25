@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        // array pre processing appraoch
+
+        int n = height.size();
+        vector<int> left(n); // Store maximum heights of walls on the left side
+        vector<int> right(n); // Store maximum heights of walls on the right side
+        int trapped = 0;
+
+        // populate the left array
+        int maxi = height[0];
+        for (int i = 0; i < n; i++) {
+            maxi = max(maxi, height[i]);
+            left[i] = maxi;
+        }
+
+        // popoulate the right array
+        maxi = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            maxi = max(maxi, height[i]);
+            right[i] = maxi;
+        }
+
+        // find trapped water
+        for (int i = 0; i < n; i++) {
+            trapped += min(left[i], right[i]) - height[i]; 
+                                // Find the shorter of left and right walls
+                                // and calculate trapped water by subtracting
+                                // current height.
+        }
+        return trapped;
+    }
+};
