@@ -1,0 +1,26 @@
+class Solution {
+  public:
+    // Function to get the maximum total value in the knapsack.
+    double fractionalKnapsack(int w, Item arr[], int n) {
+        
+       
+       multimap<double, pair<int, int>, greater<double>> m;
+        for (int i = 0; i < n; i++) {
+            m.insert({(double)arr[i].value / arr[i].weight, {arr[i].weight, arr[i].value}});
+        }
+        
+        double ans = 0;
+        for (auto it = m.begin(); it != m.end(); ++it) {
+            if (w - it->second.first >= 0) {
+                w -= it->second.first;
+                ans += it->second.second;
+            } else {
+                ans += it->first * w;
+                break;
+            }
+        }
+        
+        return ans;
+
+    }
+};
