@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {        
+
+        if(dividend == divisor) return 1;
+        if(divisor==1) return dividend;
+
+        bool sign = true;
+         
+        if(dividend<=0 && divisor>0)sign = false;
+        else if(dividend>=0 && divisor<0)sign = false;
+
+        long long int dvnd=abs((long long int)dividend);
+        long long int dvsr=abs((long long int)divisor);
+
+        if(dvnd>INT_MAX && dvsr<=2){dvnd--;}
+        if(dvnd==dvsr){
+            if(sign) return 1;
+            return -1;
+        }
+        
+        long long int cnt=0;
+        while(dvnd>=dvsr){
+            int i=0;
+            long long int pdct=0;
+            while(pdct<=dvnd){
+               pdct=dvsr*pow(2,i);
+               i++;
+            }
+            i--;
+            dvnd-=(dvsr*pow(2,i-1));
+            cnt+=pow(2,i-1);
+            
+        }
+        
+        if(cnt>=INT_MAX && sign==true){  return INT_MAX;}
+        
+        if(cnt>=INT_MAX && sign==false){  return INT_MIN;}
+        
+        if(dividend==INT_MIN && divisor==2){
+            cnt++;
+        }
+        if(sign==true) return cnt;
+        return -cnt;
+    }
+};
